@@ -4,3 +4,38 @@ server:
 girl :
   age : 21
   cupSize : B
+spring:
+  datasource:
+    username: testadmin
+    password: test123456
+    driver-class-name: com.mysql.jdbc.Driver
+    type: com.alibaba.druid.pool.DruidDataSource
+  druid:
+    initialSize : 5
+    minIdle : 5
+    maxActive : 20
+    ## 配置获取连接等待超时的时间
+    maxWait : 60000
+    # 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒
+    timeBetweenEvictionRunsMillis : 60000
+
+mybatis :
+  #config : classpath:mybatis-config.xml
+  mapperLocations : classpath:mappers/*.xml
+  type-aliases-package: com.springboot.girl.bean
+  configuration:
+      map-underscore-to-camel-case: true
+      default-fetch-size: 100
+      default-statement-timeout: 30
+pagehelper:
+    helperDialect: mysql
+    reasonable: true
+    supportMethodsArguments: true
+    params: count=countSql
+#指定输出执行SQL的DAO包路径名
+logging:
+  level:
+    com :
+      springboot :
+        girl :
+          mapper : debug

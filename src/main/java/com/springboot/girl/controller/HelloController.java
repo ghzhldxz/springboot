@@ -1,5 +1,6 @@
 package com.springboot.girl.controller;
 
+import com.springboot.girl.bean.BizResult;
 import com.springboot.girl.properties.GirlProperty;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,6 +25,11 @@ public class HelloController {
     @RequestMapping(value = "/",method = RequestMethod.GET)
     public String getIndex() {
         return "Hello SpringBoot the girl's cupSize is "+this.girlProperty.getCupSize()+" and age is "+this.girlProperty.getAge();
+    }
+
+    @RequestMapping(value="/result",method = RequestMethod.GET)
+    public BizResult<String> testResult() {
+        return BizResult.success("HAHA");
     }
 
 }
