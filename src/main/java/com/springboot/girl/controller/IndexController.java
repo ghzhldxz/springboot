@@ -1,5 +1,6 @@
 package com.springboot.girl.controller;
 
+import com.springboot.girl.bean.Account;
 import com.springboot.girl.service.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -22,9 +23,10 @@ public class IndexController {
         return "index";
     }
 
-    @RequestMapping(value = "/transfer",method = RequestMethod.GET)
+    @RequestMapping(value = "/transfer",method = RequestMethod.POST)
     @ResponseBody
-    public String transfer() {
+    public String transfer(Account account) {
+        System.out.println("========================"+account.getName()+",password="+account.getMoney());
         try {
             return accountService.transfer("aaa","ddd",200d);
         } catch (Exception e) {
