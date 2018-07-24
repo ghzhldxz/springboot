@@ -18,6 +18,16 @@ spring:
     maxWait : 60000
     # 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒
     timeBetweenEvictionRunsMillis : 60000
+  #集成redis
+  redis :
+      database : 1
+      port : 6379
+      password : 123456
+      poolMaxIdle : 10
+      poolMaxTotal : 10
+      poolMaxWait : 3
+      #超时时间是ms
+      timeout : 5
 
 mybatis :
   #config : classpath:mybatis-config.xml
