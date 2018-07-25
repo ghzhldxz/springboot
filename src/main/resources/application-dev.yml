@@ -6,6 +6,7 @@ girl :
   cupSize : B
 spring:
   datasource:
+    url:
     username: testadmin
     password: test123456
     driver-class-name: com.mysql.jdbc.Driver
@@ -20,14 +21,22 @@ spring:
     timeBetweenEvictionRunsMillis : 60000
   #集成redis
   redis :
-      database : 1
+      host :
       port : 6379
       password : 123456
-      poolMaxIdle : 10
-      poolMaxTotal : 10
-      poolMaxWait : 3
+      poolMaxIdle : 100
+      poolMaxTotal : 80
+      poolMaxWait : 3000
+      poolMaxActive : 100
       #超时时间是ms
-      timeout : 5
+      timeout : 50
+      numTestsPerEvictionRun : 1024
+      timeBetweenEvictionRunsMillis : 30000
+      minEvictableIdleTimeMillis : 1800000
+      softMinEvictableIdleTimeMillis : 10000
+      testOnBorrow : true
+      testWhileIdle : true
+      blockWhenExhausted : false
 
 mybatis :
   #config : classpath:mybatis-config.xml

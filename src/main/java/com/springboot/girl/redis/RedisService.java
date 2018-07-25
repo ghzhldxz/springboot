@@ -1,6 +1,7 @@
 package com.springboot.girl.redis;
 
 import com.alibaba.fastjson.JSONObject;
+import org.aspectj.lang.annotation.AfterThrowing;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,11 +12,11 @@ import redis.clients.jedis.JedisPool;
 
 @Service
 public class RedisService {
-	
-	@Autowired
-	JedisPool jedisPool;
-	
-	/**
+
+    @Autowired
+	private JedisPool jedisPool;
+
+    /**
 	 * 获取当个对象
 	 * */
 	public <T> T get(KeyPrefix prefix, String key,  Class<T> clazz) {

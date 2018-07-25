@@ -19,8 +19,16 @@ public class BizResult <T> {
         return new BizResult<T>(200,"SUCCESS",data);
     }
 
-    public static <T> BizResult<T> failure(ResultCode resultCode) {
-        return new BizResult<T>(resultCode.getCode(),resultCode.getMsg(),null);
+    public static <T> BizResult<T> success(CodeMsg codeMsg) {
+        return new BizResult<T>(codeMsg.getCode(),codeMsg.getMsg(),null);
+    }
+
+    public static <T> BizResult<T> failure(CodeMsg codeMsg) {
+        return new BizResult<T>(codeMsg.getCode(),codeMsg.getMsg(),null);
+    }
+
+    public static <T> BizResult<T> failure(String msg) {
+        return new BizResult<T>(500,msg,null);
     }
 
     public int getCode() {
