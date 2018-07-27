@@ -39,7 +39,9 @@ public class LoginController {
 
     @RequestMapping(value = "/do_login",method = RequestMethod.POST)
     @ResponseBody
-    public BizResult<String> doLogin(HttpServletResponse response, @Valid LoginVo loginVo, BindingResult bindingResult) {
+    public BizResult<String> doLogin(HttpServletResponse response, @Valid LoginVo loginVo
+           // , BindingResult bindingResult
+    ) {
         logger.info("登录参数："+JSONObject.toJSONString(loginVo));
         //传统的校验方式
        /* if(loginVo == null || loginVo.getMobile() == null || loginVo.getPassword() == null) {
