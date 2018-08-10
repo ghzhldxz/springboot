@@ -1,5 +1,6 @@
 package com.springboot.girl.config;
 
+import com.springboot.girl.Exception.UserAuthException;
 import com.springboot.girl.bean.User;
 import com.springboot.girl.service.UserService;
 import com.springboot.girl.service.impl.UserServiceImpl;
@@ -27,6 +28,7 @@ public class UserArgumentResolver implements HandlerMethodArgumentResolver {
 		return clazz==User.class;
 	}
 
+
 	public Object resolveArgument(MethodParameter parameter, ModelAndViewContainer mavContainer,
 			NativeWebRequest webRequest, WebDataBinderFactory binderFactory) throws Exception {
 		HttpServletRequest request = webRequest.getNativeRequest(HttpServletRequest.class);
@@ -43,6 +45,9 @@ public class UserArgumentResolver implements HandlerMethodArgumentResolver {
 
 	private String getCookieValue(HttpServletRequest request, String cookiName) {
 		Cookie[]  cookies = request.getCookies();
+		if(cookies == null) {
+			throw new UserAuthException();
+		}
 		for(Cookie cookie : cookies) {
 			if(cookie.getName().equals(cookiName)) {
 				return cookie.getValue();

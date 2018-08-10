@@ -34,6 +34,7 @@ public class LoginController {
 
     @RequestMapping(value = "/to_login")
     public String toLoginPage() {
+
         return "login";
     }
 

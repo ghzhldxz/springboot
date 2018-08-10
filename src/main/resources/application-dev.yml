@@ -37,6 +37,17 @@ spring:
       testOnBorrow : true
       testWhileIdle : true
       blockWhenExhausted : false
+#static
+  resources :
+    add-mappings : true
+    cache :
+      period : 3600
+    chain :
+      cache : true
+      enabled : true
+      gzipped : true
+      html-application-cache : true
+    static-locations : classpath:/static/
 
 mybatis :
   #config : classpath:mybatis-config.xml
@@ -58,3 +69,4 @@ logging:
       springboot :
         girl :
           mapper : debug
+

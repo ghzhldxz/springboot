@@ -9,8 +9,12 @@ import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -24,7 +28,7 @@ import java.util.List;
 public class GlobalExceptionHandler {
     Logger logger = LoggerFactory.getLogger(GlobalExceptionHandler.class);
 
-    @ExceptionHandler(Exception.class)
+    @ExceptionHandler({GlobalException.class,BindException.class})
     @ResponseBody
     public BizResult<String> exceptionHandle(HttpServletRequest request, Exception e) {
         if(e instanceof GlobalException) {
@@ -43,30 +47,10 @@ public class GlobalExceptionHandler {
         }
     }
 
- /*   @Around("execution(* com.springboot.girl.controller.*.*(..)) && args(..,bindingResult)")
-    public Object doAround(ProceedingJoinPoint pjp, BindingResult bindingResult) throws Throwable {
-        Object retVal;
-        if (bindingResult.hasErrors()) {
-            retVal = doErrorHandle(bindingResult.getAllErrors());
-        } else {
-            retVal = pjp.proceed();
-        }
-        return retVal;
-
+    @ExceptionHandler({UserAuthException.class})
+    //@ResponseStatus
+    public ModelAndView checkUserAuthHandle(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        return new ModelAndView("redirect:"+request.getContextPath()+"/login/to_login");
     }
 
-    @AfterThrowing(value = "execution(* com.springboot.girl.controller.*.*(..)) ", throwing = "e")
-    @ResponseBody
-    public Object doException(JoinPoint joinPoint, Throwable e) {
-        if(e instanceof GlobalException) {
-            return BizResult.failure(CodeMsg.GLOBAL_ERROR);
-        } else {
-            return BizResult.failure(CodeMsg.SERVER_ERROR);
-        }
-    }
-
-    private BizResult<String> doErrorHandle(List<ObjectError> errors) {
-        return BizResult.failure(CodeMsg.BIND_ERROR.filterMsg(errors.get(0).getDefaultMessage()));
-    }*/
-
-}
+ }

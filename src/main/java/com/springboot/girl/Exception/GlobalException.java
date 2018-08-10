@@ -3,6 +3,7 @@ package com.springboot.girl.Exception;
 import com.springboot.girl.bean.CodeMsg;
 
 import java.io.Serializable;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * @Description 全局异常
