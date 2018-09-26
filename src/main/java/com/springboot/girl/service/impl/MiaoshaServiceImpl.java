@@ -2,10 +2,13 @@ package com.springboot.girl.service.impl;
 
 import com.springboot.girl.bean.*;
 import com.springboot.girl.bean.vo.GoodsVo;
+import com.springboot.girl.constants.OrderStatusEnum;
 import com.springboot.girl.mapper.MiaoshaGoodsMapper;
 import com.springboot.girl.mapper.MiaoshaOrderMapper;
 import com.springboot.girl.mapper.OrderMapper;
+import com.springboot.girl.service.GoodsService;
 import com.springboot.girl.service.MiaoshaService;
+import com.springboot.girl.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -19,12 +22,15 @@ import java.util.List;
  */
 @Service
 public class MiaoshaServiceImpl implements MiaoshaService {
+
     @Autowired
-    OrderMapper orderMapper;
+    MiaoshaOrderMapper miaoshaOrderMapper;
     @Autowired
     MiaoshaGoodsMapper miaoshaGoodsMapper;
     @Autowired
-    MiaoshaOrderMapper miaoshaOrderMapper;
+    OrderService orderService;
+    @Autowired
+    GoodsService goodsService;
 
     /**
      * 秒杀下单
@@ -36,8 +42,18 @@ public class MiaoshaServiceImpl implements MiaoshaService {
     @Transactional
     @Override
     public Order miaoshaGoods(User user, GoodsVo goods) {
+        //减库存
+        goodsService.reductMiaoshaGoodStock(goods);
+        //生成订单
+        Order order = orderService.createOrder(user,goods);
 
-        return null;
+        //生成秒杀订单
+        MiaoshaOrder miaoshaOrder = new MiaoshaOrder();
+        miaoshaOrder.setGoodsId(goods.getId());
+        miaoshaOrder.setOrderId(order.getId());
+        miaoshaOrderMapper.insertSelective(miaoshaOrder);
+
+        return order;
     }
 
     /**
@@ -51,5 +67,12 @@ public class MiaoshaServiceImpl implements MiaoshaService {
         MiaoshaOrderExample example = new MiaoshaOrderExample();
         example.createCriteria().andUserIdEqualTo(userId).andGoodsIdEqualTo(goodsId);
         return miaoshaOrderMapper.selectByExample(example);
+    }
+
+    @Override
+    public MiaoshaGoods queryMiaoshaGoodsByGoodsId(Long goodsId) {
+        MiaoshaGoodsExample example = new MiaoshaGoodsExample();
+        example.createCriteria().andGoodsIdEqualTo(goodsId);
+        return miaoshaGoodsMapper.selectByExample(example).get(0);
     }
 }

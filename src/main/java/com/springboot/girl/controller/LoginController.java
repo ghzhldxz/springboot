@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.springboot.girl.bean.BizResult;
 import com.springboot.girl.bean.CodeMsg;
 import com.springboot.girl.bean.vo.LoginVo;
+import com.springboot.girl.rabbitmq.MqSender;
 import com.springboot.girl.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -31,10 +32,12 @@ public class LoginController {
 
     @Autowired
     UserService userService;
+    @Autowired
+    MqSender mqSender;
 
     @RequestMapping(value = "/to_login")
     public String toLoginPage() {
-
+        mqSender.sendMsg("你好 rabbitmq");
         return "login";
     }
 

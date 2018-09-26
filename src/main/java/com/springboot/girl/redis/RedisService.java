@@ -28,6 +28,21 @@ public class RedisService {
 			  returnToPool(jedis);
 		 }
 	}
+
+	public boolean del(KeyPrefix prefix,String key) {
+	    Jedis jedis = null;
+	    try {
+	        jedis = jedisPool.getResource();
+	        String realKey = prefix.getPrefix() + key;
+	        Long ret = jedis.del(realKey);
+	        if(ret>0) {
+	            return true;
+            }
+            return false;
+        } finally {
+	        returnToPool(jedis);
+        }
+    }
 	
 	/**
 	 * 设置对象
@@ -55,7 +70,7 @@ public class RedisService {
     /**
      * 判断key是否存在
      * */
-    public <T> boolean exists(KeyPrefix prefix, String key) {
+    public boolean exists(KeyPrefix prefix, String key) {
         Jedis jedis = null;
         try {
             jedis =  jedisPool.getResource();
@@ -70,7 +85,7 @@ public class RedisService {
     /**
      * 增加值
      * */
-    public <T> Long incr(KeyPrefix prefix, String key) {
+    public Long incr(KeyPrefix prefix, String key) {
         Jedis jedis = null;
         try {
             jedis =  jedisPool.getResource();
@@ -85,7 +100,7 @@ public class RedisService {
     /**
      * 减少值
      * */
-    public <T> Long decr(KeyPrefix prefix, String key) {
+    public Long decr(KeyPrefix prefix, String key) {
         Jedis jedis = null;
         try {
             jedis =  jedisPool.getResource();
@@ -97,12 +112,11 @@ public class RedisService {
         }
     }
 	
-	private <T> String beanToString(T value) {
+	public static <T> String beanToString(T value) {
 		return JSON.toJSONString(value);
 	}
 
-	@SuppressWarnings("unchecked")
-	private <T> T stringToBean(String str, Class<T> clazz) {
+	public <T> T stringToBean(String str, Class<T> clazz) {
 		if(str == null || "".equals(str) || clazz == null) {
 			return null;
 		}

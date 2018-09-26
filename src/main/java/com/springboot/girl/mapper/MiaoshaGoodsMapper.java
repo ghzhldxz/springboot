@@ -27,4 +27,6 @@ public interface MiaoshaGoodsMapper {
     int updateByPrimaryKeySelective(MiaoshaGoods record);
 
     int updateByPrimaryKey(MiaoshaGoods record);
+
+    void updateMiaoshaGoodStock(MiaoshaGoods miaoshaGoods);
 }

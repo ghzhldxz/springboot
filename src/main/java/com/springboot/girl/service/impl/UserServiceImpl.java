@@ -6,6 +6,7 @@ import com.springboot.girl.bean.CodeMsg;
 import com.springboot.girl.bean.User;
 import com.springboot.girl.bean.vo.LoginVo;
 import com.springboot.girl.mapper.UserMapper;
+import com.springboot.girl.redis.BasePrefix;
 import com.springboot.girl.redis.MiaoshaUserKey;
 import com.springboot.girl.redis.RedisService;
 import com.springboot.girl.service.UserService;
@@ -55,6 +56,39 @@ public class UserServiceImpl implements UserService{
         addCookie(response,tokenId,user);
 
         logger.info("end>>>>>>>>>>login");
+        return true;
+    }
+
+    public User getById(long id) {
+        User user = redisService.get(MiaoshaUserKey.userId,id+"",User.class);
+        if(user!=null){
+            return user;
+        }
+        user = userMapper.selectByPrimaryKey(id);
+        if(user != null) {
+            redisService.set(MiaoshaUserKey.userId,user.getId()+"",user);
+        }
+        return user;
+    }
+
+    public boolean updatePassword(String tokenId,long id,String passwordNew) {
+        User user = this.getById(id);
+        if(user == null) {
+            throw new GlobalException(CodeMsg.MOBILE_NOT_EXIST);
+        }
+        User beUpdateUser = new User();
+        beUpdateUser.setId(id);
+        beUpdateUser.setPassword(MD5Util.formPassToDBPass(passwordNew,user.getSalt()));
+        int ret = userMapper.updateByPrimaryKey(beUpdateUser);
+        if(ret>0) {
+            //清理用户信息缓存
+            redisService.del(MiaoshaUserKey.userId,id+"");
+            user.setPassword(beUpdateUser.getPassword());
+            //更新缓存中cookie存储的值
+            //我有一个疑问？为啥不用token对应的user信息，而要再缓存一个userid对应的user信息呢？这不是浪费空间吗？而且变更起来麻烦
+            //而且还有一个问题，缓存的代码跟业务代码耦合度很高，维护起来不是很方便呀~
+            redisService.set(MiaoshaUserKey.token,tokenId,user);
+        }
         return true;
     }
 

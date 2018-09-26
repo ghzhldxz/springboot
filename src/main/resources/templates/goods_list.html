@@ -19,6 +19,11 @@
     <script type="text/javascript" th:src="@{/js/common.js}"></script>
 </head>
 <body>
+<div><font color="bule">批量导入代扣信息</font></div>
+<form action="/transfer" method="post" enctype="multipart/form-data" onsubmit="return check();">
+    <div style="margin: 30px;"><input id="excel_file" type="file" name="filename" accept="xlsx" size="80"/>
+        <input id="excel_button" type="submit" value="导入Excel"/></div>
+</form>
 
 <div class="panel panel-default">
   <div class="panel-heading">秒杀商品列表</div>
@@ -33,6 +38,32 @@
         <td><a th:href="'/goods_detail.htm?goodsId='+${goods.id}">详情</a></td>
      </tr>  
   </table>
+
+
 </div>
+
 </body>
+
+<script type="text/javascript">
+    function check() {
+        var excel_file = $("#excel_file").val();
+        if (excel_file == "" || excel_file.length == 0) {
+            alert("请选择文件路径！");
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    $(document).ready(function () {
+        var msg="";
+        if($("#importMsg").text()!=null){
+            msg=$("#importMsg").text();
+        }
+        if(msg!=""){
+            alert(msg);
+        }
+    });
+</script>
+
 </html>

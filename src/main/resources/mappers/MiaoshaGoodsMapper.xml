@@ -225,4 +225,9 @@
       end_date = #{endDate,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=BIGINT}
   </update>
+  <!--减秒杀商品的库存-->
+  <update id="updateMiaoshaGoodStock" parameterType="com.springboot.girl.bean.MiaoshaGoods" >
+    update miaosha_goods set stock_count = stock_count - 1
+     where goods_id = #{goodsId} and stock_count &gt; 0
+  </update>
 </mapper>

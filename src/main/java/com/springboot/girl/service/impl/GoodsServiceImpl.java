@@ -1,9 +1,11 @@
 package com.springboot.girl.service.impl;
 
-import com.springboot.girl.bean.User;
+import com.springboot.girl.bean.Goods;
+import com.springboot.girl.bean.MiaoshaGoods;
 import com.springboot.girl.bean.vo.GoodsVo;
 import com.springboot.girl.mapper.GoodsMapper;
-import com.springboot.girl.service.GoodService;
+import com.springboot.girl.mapper.MiaoshaGoodsMapper;
+import com.springboot.girl.service.GoodsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,9 +17,12 @@ import java.util.List;
  * @Date 2018/7/25
  */
 @Service
-public class GoodsServiceImpl implements GoodService {
+public class GoodsServiceImpl implements GoodsService {
     @Autowired
     GoodsMapper goodsMapper;
+
+    @Autowired
+    MiaoshaGoodsMapper miaoshaGoodsMapper;
 
     /**
      * 查询秒杀商品列表
@@ -41,5 +46,12 @@ public class GoodsServiceImpl implements GoodService {
             return null;
         }
         return goodsList.get(0);
+    }
+
+    @Override
+    public void reductMiaoshaGoodStock(GoodsVo goods) {
+        MiaoshaGoods miaoshaGoods = new MiaoshaGoods();
+        miaoshaGoods.setGoodsId(goods.getId());
+        miaoshaGoodsMapper.updateMiaoshaGoodStock(miaoshaGoods);
     }
 }

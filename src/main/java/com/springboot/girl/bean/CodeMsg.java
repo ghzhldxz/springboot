@@ -16,6 +16,7 @@ public class CodeMsg {
     public static final CodeMsg MOBILE_ERROR = new CodeMsg(5001003,"手机输入格式错误");
     public static final CodeMsg USER_EMPTY = new CodeMsg(5001004,"查无此用户");
     public static final CodeMsg PASSWORD_ERROR = new CodeMsg(5001005,"登录密码错误");
+    public static final CodeMsg MOBILE_NOT_EXIST = new CodeMsg(5001006,"手机号不存在");
     public CodeMsg(int code,String msg) {
         this.code = code;
         this.msg = msg;

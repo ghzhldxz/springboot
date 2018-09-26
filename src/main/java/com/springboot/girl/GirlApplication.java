@@ -6,6 +6,10 @@ import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import java.lang.ref.SoftReference;
+import java.util.LinkedList;
+import java.util.List;
+
 @SpringBootApplication
 //@MapperScan("com.springboot.girl.mapper")
 public class GirlApplication {

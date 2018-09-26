@@ -21,7 +21,7 @@
 <body>
 
 <div class="panel panel-default">
-  <div class="panel-heading">秒杀商品详情</div>
+  <div class="panel-heading">秒杀商品详情old</div>
   <div class="panel-body">
   	<span th:if="${user eq null}"> 您还没有登录，请登陆后再操作<br/></span>
   	<span>没有收货地址的提示。。。</span>
@@ -76,7 +76,6 @@ $(function(){
 function countDown(){
     debugger
 	var remainSeconds = $("#remainSeconds").val();
-
 	var timeout;
 	if(remainSeconds > 0){//秒杀还没开始，倒计时
 		$("#buyButton").attr("disabled", true);
@@ -112,8 +111,6 @@ function countEndingSeconds() {
         $("#buyButton").attr("disabled", true);
         $("#miaoshaTip").html("秒杀已经结束");
     }
-
-
 }
 
 </script>

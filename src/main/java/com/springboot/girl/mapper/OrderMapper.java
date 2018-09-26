@@ -12,9 +12,9 @@ public interface OrderMapper {
 
     int deleteByPrimaryKey(Long id);
 
-    int insert(Order record);
+    Long insert(Order record);
 
-    int insertSelective(Order record);
+    Long insertSelective(Order record);
 
     List<Order> selectByExample(OrderExample example);
 

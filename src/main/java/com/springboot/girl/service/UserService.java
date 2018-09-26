@@ -22,4 +22,5 @@ public interface UserService {
     public boolean login(HttpServletResponse response, LoginVo loginVo) ;
 
     public User getUserByToken(HttpServletResponse response,String tokenId);
+    public boolean updatePassword(String tokenId,long id,String passwordNew);
 }

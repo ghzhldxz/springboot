@@ -1,5 +1,6 @@
 package com.springboot.girl.service;
 
+import com.springboot.girl.bean.MiaoshaGoods;
 import com.springboot.girl.bean.MiaoshaOrder;
 import com.springboot.girl.bean.Order;
 import com.springboot.girl.bean.User;
@@ -11,4 +12,6 @@ public interface MiaoshaService {
     public Order miaoshaGoods(User user, GoodsVo goods);
 
     public List<MiaoshaOrder> getMiaoshaOrderByUserIdGoodsId(Long id, Long goodsId);
+
+    public MiaoshaGoods queryMiaoshaGoodsByGoodsId(Long goodsId);
 }

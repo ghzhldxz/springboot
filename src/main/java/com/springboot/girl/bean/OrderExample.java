@@ -546,52 +546,52 @@ public class OrderExample {
             return (Criteria) this;
         }
 
-        public Criteria andOrderChannelEqualTo(Byte value) {
+        public Criteria andOrderChannelEqualTo(Integer value) {
             addCriterion("order_channel =", value, "orderChannel");
             return (Criteria) this;
         }
 
-        public Criteria andOrderChannelNotEqualTo(Byte value) {
+        public Criteria andOrderChannelNotEqualTo(Integer value) {
             addCriterion("order_channel <>", value, "orderChannel");
             return (Criteria) this;
         }
 
-        public Criteria andOrderChannelGreaterThan(Byte value) {
+        public Criteria andOrderChannelGreaterThan(Integer value) {
             addCriterion("order_channel >", value, "orderChannel");
             return (Criteria) this;
         }
 
-        public Criteria andOrderChannelGreaterThanOrEqualTo(Byte value) {
+        public Criteria andOrderChannelGreaterThanOrEqualTo(Integer value) {
             addCriterion("order_channel >=", value, "orderChannel");
             return (Criteria) this;
         }
 
-        public Criteria andOrderChannelLessThan(Byte value) {
+        public Criteria andOrderChannelLessThan(Integer value) {
             addCriterion("order_channel <", value, "orderChannel");
             return (Criteria) this;
         }
 
-        public Criteria andOrderChannelLessThanOrEqualTo(Byte value) {
+        public Criteria andOrderChannelLessThanOrEqualTo(Integer value) {
             addCriterion("order_channel <=", value, "orderChannel");
             return (Criteria) this;
         }
 
-        public Criteria andOrderChannelIn(List<Byte> values) {
+        public Criteria andOrderChannelIn(List<Integer> values) {
             addCriterion("order_channel in", values, "orderChannel");
             return (Criteria) this;
         }
 
-        public Criteria andOrderChannelNotIn(List<Byte> values) {
+        public Criteria andOrderChannelNotIn(List<Integer> values) {
             addCriterion("order_channel not in", values, "orderChannel");
             return (Criteria) this;
         }
 
-        public Criteria andOrderChannelBetween(Byte value1, Byte value2) {
+        public Criteria andOrderChannelBetween(Integer value1, Integer value2) {
             addCriterion("order_channel between", value1, value2, "orderChannel");
             return (Criteria) this;
         }
 
-        public Criteria andOrderChannelNotBetween(Byte value1, Byte value2) {
+        public Criteria andOrderChannelNotBetween(Integer value1, Integer value2) {
             addCriterion("order_channel not between", value1, value2, "orderChannel");
             return (Criteria) this;
         }
@@ -606,52 +606,52 @@ public class OrderExample {
             return (Criteria) this;
         }
 
-        public Criteria andStatusEqualTo(Byte value) {
+        public Criteria andStatusEqualTo(Integer value) {
             addCriterion("status =", value, "status");
             return (Criteria) this;
         }
 
-        public Criteria andStatusNotEqualTo(Byte value) {
+        public Criteria andStatusNotEqualTo(Integer value) {
             addCriterion("status <>", value, "status");
             return (Criteria) this;
         }
 
-        public Criteria andStatusGreaterThan(Byte value) {
+        public Criteria andStatusGreaterThan(Integer value) {
             addCriterion("status >", value, "status");
             return (Criteria) this;
         }
 
-        public Criteria andStatusGreaterThanOrEqualTo(Byte value) {
+        public Criteria andStatusGreaterThanOrEqualTo(Integer value) {
             addCriterion("status >=", value, "status");
             return (Criteria) this;
         }
 
-        public Criteria andStatusLessThan(Byte value) {
+        public Criteria andStatusLessThan(Integer value) {
             addCriterion("status <", value, "status");
             return (Criteria) this;
         }
 
-        public Criteria andStatusLessThanOrEqualTo(Byte value) {
+        public Criteria andStatusLessThanOrEqualTo(Integer value) {
             addCriterion("status <=", value, "status");
             return (Criteria) this;
         }
 
-        public Criteria andStatusIn(List<Byte> values) {
+        public Criteria andStatusIn(List<Integer> values) {
             addCriterion("status in", values, "status");
             return (Criteria) this;
         }
 
-        public Criteria andStatusNotIn(List<Byte> values) {
+        public Criteria andStatusNotIn(List<Integer> values) {
             addCriterion("status not in", values, "status");
             return (Criteria) this;
         }
 
-        public Criteria andStatusBetween(Byte value1, Byte value2) {
+        public Criteria andStatusBetween(Integer value1, Integer value2) {
             addCriterion("status between", value1, value2, "status");
             return (Criteria) this;
         }
 
-        public Criteria andStatusNotBetween(Byte value1, Byte value2) {
+        public Criteria andStatusNotBetween(Integer value1, Integer value2) {
             addCriterion("status not between", value1, value2, "status");
             return (Criteria) this;
         }

@@ -37,6 +37,30 @@ spring:
       testOnBorrow : true
       testWhileIdle : true
       blockWhenExhausted : false
+  #rabbitmq配置
+  rabbitmq :
+      host : 127.0.0.1
+      port : 5672
+      username : guest
+      password : guest
+      virtual-host : /
+      listener :
+        simple :
+          concurrency :  10
+          max-concurrency : 10
+  #预读取消息的个数
+          prefetch :  1
+  #默认消费者自动启动
+          auto-startup : true
+  #消息消费失败，重新入队
+          default-requeue-rejected :  true
+      template :
+        retry :
+          enabled : true
+          initial-interval : 1000
+          max-attempts : 3
+          max-interval : 10000
+          multiplier : 1.0
 #static
   resources :
     add-mappings : true
@@ -69,4 +93,3 @@ logging:
       springboot :
         girl :
           mapper : debug
-

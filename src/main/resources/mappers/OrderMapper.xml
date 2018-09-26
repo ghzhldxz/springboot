@@ -106,7 +106,7 @@
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.springboot.girl.bean.Order" >
+  <insert id="insert" parameterType="com.springboot.girl.bean.Order" useGeneratedKeys="true" keyProperty="id">
     insert into order_info (id, user_id, goods_id, 
       delivery_addr_id, goods_name, goods_count, 
       goods_price, order_channel, status, 
@@ -116,7 +116,7 @@
       #{goodsPrice,jdbcType=DECIMAL}, #{orderChannel,jdbcType=TINYINT}, #{status,jdbcType=TINYINT}, 
       #{createDate,jdbcType=TIMESTAMP}, #{payDate,jdbcType=TIMESTAMP})
   </insert>
-  <insert id="insertSelective" parameterType="com.springboot.girl.bean.Order" >
+  <insert id="insertSelective" parameterType="com.springboot.girl.bean.Order" useGeneratedKeys="true" keyProperty="id" >
     insert into order_info
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -146,9 +146,7 @@
       <if test="status != null" >
         status,
       </if>
-      <if test="createDate != null" >
         create_date,
-      </if>
       <if test="payDate != null" >
         pay_date,
       </if>
@@ -183,6 +181,9 @@
       </if>
       <if test="createDate != null" >
         #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createDate == null" >
+        now(),
       </if>
       <if test="payDate != null" >
         #{payDate,jdbcType=TIMESTAMP},
