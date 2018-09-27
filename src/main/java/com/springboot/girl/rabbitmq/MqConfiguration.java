@@ -1,9 +1,6 @@
 package com.springboot.girl.rabbitmq;
 
-import org.springframework.amqp.core.Binding;
-import org.springframework.amqp.core.BindingBuilder;
-import org.springframework.amqp.core.Queue;
-import org.springframework.amqp.core.TopicExchange;
+import org.springframework.amqp.core.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringBootConfiguration;
 import org.springframework.context.annotation.Bean;
@@ -36,6 +33,11 @@ public class MqConfiguration {
         return new Queue("q2",true);
     }
 
+    /**
+     * 主题模式交换机，队列只接收指定路由关键字的消息
+     * 发送时：要指定路由关键字
+     * @return
+     */
     @Bean
     public TopicExchange topicExchange() {
         return new TopicExchange("exchange");
@@ -49,6 +51,25 @@ public class MqConfiguration {
     @Bean
     public Binding bindingTopic2() {
         return BindingBuilder.bind(createQueue2()).to(topicExchange()).with("topic.#");
+    }
+
+    /**
+     * 广播模式交换机
+     * @return
+     */
+    @Bean
+    public Queue createFanoutQueue() {
+        return new Queue("fanoutQueue1",true);
+    }
+
+    @Bean
+    public FanoutExchange fanoutExchange() {
+        return new FanoutExchange("fanoutExchange");
+    }
+
+    @Bean
+    public Binding bindingFanout() {
+        return BindingBuilder.bind(createFanoutQueue()).to(fanoutExchange());
     }
 
 }

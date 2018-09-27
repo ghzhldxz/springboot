@@ -62,6 +62,11 @@ public class Test1 {
     }
 
     @Test
+    public void sendFanoutMsg() {
+        mqSender.sendFanoutMsg("hi fanout exchange");
+    }
+
+    @Test
     @Transactional
     public void testCreateOrder() {
         Test1 t = null;

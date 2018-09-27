@@ -10,6 +10,8 @@ import com.springboot.girl.service.GoodsService;
 import com.springboot.girl.service.MiaoshaService;
 import com.springboot.girl.service.UserService;
 import com.springboot.girl.util.SpringWebContextUtil;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -26,6 +28,7 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/goods")
+@Api("商品查询接口")
 public class GoodsController {
 	Logger logger = LoggerFactory.getLogger(GoodsController.class);
 
@@ -73,8 +76,9 @@ public class GoodsController {
 	 * @param user
 	 * @return
 	 */
-	@RequestMapping(value = "/to_list",produces = "text/html")
+	@RequestMapping(value = "/to_list",produces = "text/html",method = RequestMethod.GET)
 	@ResponseBody
+	@ApiOperation(value = "查询商品列表")
 	public String list(Model model,HttpServletResponse response,HttpServletRequest request,
 					   // @CookieValue(value = "token",required = false) String cookieValue,//两个参数只要上送任意一个就行，所以要设置为非必需
 					   // @RequestParam(value = "token",required = false) String paramCookieValue
@@ -125,7 +129,7 @@ public class GoodsController {
 		return "goods_detail";
 	}*/
 
-	@RequestMapping("/detail/{goodsId}")
+	@RequestMapping(value = "/detail/{goodsId}",method = RequestMethod.POST)
 	@ResponseBody
 	public BizResult<GoodsDetailVo> toDetail(@PathVariable("goodsId") Long goodsId, Model model,User user) {
 		GoodsVo goods = goodService.queryGoodVoByGoodsId(goodsId);

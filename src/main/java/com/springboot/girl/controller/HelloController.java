@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @Date 2018/7/20
  */
 @RestController
+@RequestMapping("/hello")
 public class HelloController {
     //方式一：直接导入属性值
 //    @Value("${girl.age}")
@@ -22,7 +23,7 @@ public class HelloController {
     @Autowired
     GirlProperty girlProperty;
 
-    @RequestMapping(value = "/",method = RequestMethod.GET)
+    @RequestMapping(value = "/getIndex",method = RequestMethod.GET)
     public String getIndex() {
         return "Hello SpringBoot the girl's cupSize is "+this.girlProperty.getCupSize()+" and age is "+this.girlProperty.getAge();
     }

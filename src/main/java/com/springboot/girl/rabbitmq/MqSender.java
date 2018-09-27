@@ -45,4 +45,11 @@ public class MqSender {
         amqpTemplate.convertAndSend("exchange","topic.key11",message);
     }
 
+    public <T> void sendFanoutMsg(T msg) {
+        String message = RedisService.beanToString(msg);
+        log.info("生成fanoutExchange消息3："+message);
+        amqpTemplate.convertAndSend("fanoutExchange","",message);//路由关键字为空（不能省略）
+
+    }
+
 }

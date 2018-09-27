@@ -30,4 +30,10 @@ public class MqRecevier {
         log.info("我收到了q2消息："+msg);
     }
 
+   // @RabbitListener(queues = "fanoutQueue1")
+    public void receiveFanoutMsg (String msg) {
+        log.info("我收到了fanoutExchange消息："+msg);
+    }
+
+
 }
