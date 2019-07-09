@@ -1,4 +1,4 @@
-package com.springboot.girl.sufa;
+package com.springboot.girl.suanfa;
 
 /**
  * @Description c语言中数据越界无限循环问题验证

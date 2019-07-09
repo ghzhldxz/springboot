@@ -23,17 +23,19 @@ public class UserArgumentResolver implements HandlerMethodArgumentResolver {
 	@Autowired
 	UserService userService;
 	
+	@Override
 	public boolean supportsParameter(MethodParameter parameter) {
 		Class<?> clazz = parameter.getParameterType();
 		return clazz==User.class;
 	}
 
 
+	@Override
 	public Object resolveArgument(MethodParameter parameter, ModelAndViewContainer mavContainer,
-			NativeWebRequest webRequest, WebDataBinderFactory binderFactory) throws Exception {
+								  NativeWebRequest webRequest, WebDataBinderFactory binderFactory) throws Exception {
 		HttpServletRequest request = webRequest.getNativeRequest(HttpServletRequest.class);
 		HttpServletResponse response = webRequest.getNativeResponse(HttpServletResponse.class);
-		
+		//TODO 这里应该用来绑定用户的信息（通过redis获取用户信息，在参数列表中有User的）
 		String paramToken = request.getParameter(UserServiceImpl.COOKIE_NAME);
 		String cookieToken = getCookieValue(request, UserServiceImpl.COOKIE_NAME);
 		if(StringUtils.isEmpty(cookieToken) && StringUtils.isEmpty(paramToken)) {

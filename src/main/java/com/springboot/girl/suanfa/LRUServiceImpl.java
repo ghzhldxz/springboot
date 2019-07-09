@@ -1,4 +1,4 @@
-package com.springboot.girl.sufa;
+package com.springboot.girl.suanfa;
 
 /**
  * @Description 用列表实现LRU算法
