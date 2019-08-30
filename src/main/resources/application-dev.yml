@@ -6,7 +6,7 @@ girl :
   cupSize : B
 spring:
   datasource:
-    url:
+    url: jdbc:mysql://
     username: testadmin
     password: test123456
     driver-class-name: com.mysql.jdbc.Driver
@@ -21,7 +21,7 @@ spring:
     timeBetweenEvictionRunsMillis : 60000
   #集成redis
   redis :
-      host :
+      host : ####
       port : 6379
       password : 123456
       poolMaxIdle : 100
